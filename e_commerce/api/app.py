@@ -25,7 +25,7 @@ db = SQLAlchemy(app)
 
 # Criando a classe do Produto                           
 
-class Product(db.Model):
+class Products(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     product_id = db.Column(db.String(10), nullable=False)
     product_name = db.Column(db.String(255), nullable=False)
@@ -39,7 +39,7 @@ class Product(db.Model):
 
 
 # Criando a classe para os Usuários
-class User(db.Model):
+class Users(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_privileges = db.Column(db.Integer, nullable=False)
     name = db.Column(db.String(255), nullable=False)
