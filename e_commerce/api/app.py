@@ -56,7 +56,7 @@ class Users(db.Model):
 @app.route('/')
 def index():
     # Busque todos os produtos no banco de dados
-    products = Product.query.all()
+    products = Products.query.all()
     return render_template('../src/pages/Home/Home.jsx', products=products, logged_in=session.get('logged_in'))
 
 # Rota de conta
