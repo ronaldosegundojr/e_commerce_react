@@ -8,7 +8,7 @@ from flask_sqlalchemy import SQLAlchemy
 ######################################################
 #              Inicializando o ambiente              #
 ######################################################
-app = Flask(__name__, template_folder='template')
+app = Flask(__name__, template_folder='src/pages')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:''@localhost:3306/e_commerce_v2'
 #engine = create_engine("mysql://root:''@localhost:3306/e_commerce_v2", echo=True)
@@ -57,7 +57,7 @@ class User(db.Model):
 def index():
     # Busque todos os produtos no banco de dados
     products = Product.query.all()
-    return render_template('index.html', products=products, logged_in=session.get('logged_in'))
+    return render_template('../src/pages/Home/Home.jsx', products=products, logged_in=session.get('logged_in'))
 
 # Rota de conta
 @app.route('/account')
