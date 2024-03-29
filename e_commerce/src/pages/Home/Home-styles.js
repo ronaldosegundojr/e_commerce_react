@@ -1,14 +1,11 @@
-import React from 'react';
-import { Container, Form, Label, Input, Button, ErrorMessage } from './Login-styles'; // Importe os estilos do LoginStyles.js
+import styled from 'styled-components';
 
-const Home = () => {
-
-
-    return (
-        <Container>
-            <h2>Página inicial</h2>
-        </Container>
-    );
-};
-
-export default Home;
+export const Container = styled.div`
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+`;
