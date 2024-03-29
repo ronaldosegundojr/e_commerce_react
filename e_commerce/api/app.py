@@ -3,7 +3,7 @@
 #####################################
 from flask import Flask, render_template, request, redirect, session, url_for, flash
 from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy import create_engine
+#from sqlalchemy import create_engine
 
 ######################################################
 #              Inicializando o ambiente              #
@@ -11,7 +11,7 @@ from sqlalchemy import create_engine
 app = Flask(__name__, template_folder='template')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:''@localhost:3306/e_commerce_v2'
-engine = create_engine("mysql://root:''@localhost:3306/e_commerce_v2", echo=True)
+#engine = create_engine("mysql://root:''@localhost:3306/e_commerce_v2", echo=True)
 # engine.execute('CREATE DATABASE e_commerce_v2')
 # Criando o banco de dados
 # engine = create_engine('mysql://root:root@localhost:3306/e_commerce_v2')
