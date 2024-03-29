@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Form, Label, Input, Button, ErrorMessage } from './login-styled'; // Importe os estilos do LoginStyles.js
+import { Container, Form, Label, Input, Button, ErrorMessage } from './Login-styles'; // Importe os estilos do LoginStyles.js
 
 const Login = () => {
   const handleSubmit = (e) => {

@@ -24,7 +24,6 @@ export const Input = styled.input`
   margin-bottom: 16px;
   border: 1px solid #ccc;
   border-radius: 4px;
-  width: 100%;
 `;
 
 export const Button = styled.button`
