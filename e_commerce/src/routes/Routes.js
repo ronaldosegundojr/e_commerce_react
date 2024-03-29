@@ -1,7 +1,8 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 // import Register from './components/pages/Register';
-import Login from './components/pages/Login/Login';
+import Login from '../pages/Login/Login';
+import Home from '../pages/Home/Home';
 // import Logout from './components/pages/pages/Logout';
 // import Account from './components/pages/Account';
 // import Admin from './components/pages/Admin';
@@ -20,9 +21,10 @@ function Rotas() {
   return (
     <Router>
       <Routes>
-        {/* <Route path="/register" component={Register} /> */}
         <Route path="/login" element={<Login />} />
-        {/* <Route path="/logout" component={Logout} />
+        <Route path="/" element={<Home />} />
+        {/* <Route path="/register" component={Register} />
+        <Route path="/logout" component={Logout} />
         <Route path="/account" component={Account} />
         <Route path="/admin" component={Admin} />
         <Route path="/create_user" component={CreateUser} />
