@@ -28,7 +28,7 @@ CREATE TABLE Products (
 );
 
 -- Inserir 5 produtos de exemplo
-INSERT INTO Product (product_id, product_name, description, product_img, price, discount, product_date, quantity)
+INSERT INTO Products (product_id, product_name, description, product_img, price, discount, product_date, quantity)
 VALUES
     ('P001', 'Product 1', 'Description of Product 1', 'product1.jpg', 19.99, 10, '2023-09-20', 100),
     ('P002', 'Product 2', 'Description of Product 2', 'product2.jpg', 24.99, 5, '2023-09-21', 80),
@@ -45,7 +45,7 @@ VALUES
 
 
 -- Inserir 5 usuários de exemplo
-INSERT INTO User (user_privileges, name, username, email, password, cellphone)
+INSERT INTO Users (user_privileges, name, username, email, password, cellphone)
 VALUES
     (1, 'Admin User', 'admin', 'admin@example.com', 'admin', '1234567890'),
     (0, 'User 1', 'user', 'user1@example.com', 'user', '9876543210'),

@@ -16,3 +16,6 @@ six==1.16.0
 SQLAlchemy==2.0.29
 typing_extensions==4.10.0
 Werkzeug==3.0.1
+SQLAlchemy==1.4.45
+SQLAlchemy-Utils==0.38.3
+#sqlalchemy==2.0.29
