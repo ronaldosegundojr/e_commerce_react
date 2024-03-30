@@ -57,14 +57,14 @@ class Users(db.Model):
 def index():
     # Busque todos os produtos no banco de dados
     products = Products.query.all()
-    return render_template('../src/pages/Home/Home.jsx', products=products, logged_in=session.get('logged_in'))
+    # return render_template('../src/pages/Home/Home.jsx', products=products, logged_in=session.get('logged_in'))
 
 # Rota de conta
 @app.route('/account')
 def account():
     if is_logged_in():
         user_id = session['user_id']
-        user = User.query.get(user_id)
+        user = Users.query.get(user_id)
         if user.user_privileges == 1:
             return render_template('/account/auth/admin.html', user=user)
         else:
@@ -129,13 +129,13 @@ def register():
             flash('Senha fraca. A senha deve conter pelo menos 8 caracteres, incluindo maiúsculas, minúsculas, números e caracteres especiais.', 'danger')
         else:
             # Consulta ao banco de dados para verificar se o e-mail já existe
-            user_with_email = User.query.filter_by(email=email).first()
+            user_with_email = Users.query.filter_by(email=email).first()
 
             if user_with_email:
                 flash('Usuário já cadastrado, efetue login ou recupere a senha', 'danger')
             else:
                 # Crie um novo usuário com user_privileges igual a 0
-                new_user = User(user_privileges=0, name=username, username=username, email=email, password=password, cellphone='')
+                new_user = Users(user_privileges=0, name=username, username=username, email=email, password=password, cellphone='')
 
                 # Adicione o novo usuário ao banco de dados
                 db.session.add(new_user)
@@ -157,7 +157,7 @@ def login():
         
         # Consulta o banco de dados para verificar se o usuário existe
         # Modifique a consulta para verificar tanto o username quanto o e-mail
-        user = User.query.filter((User.username == username_or_email) | (User.email == username_or_email)).first()
+        user = Users.query.filter((Users.username == username_or_email) | (Users.email == username_or_email)).first()
         
         if user and user.password == password:  # Compare a senha diretamente
             session['logged_in'] = True
@@ -187,11 +187,11 @@ def login():
 def admin():
     if is_logged_in():
         user_id = session['user_id']
-        user = User.query.get(user_id)
+        user = Users.query.get(user_id)
         if user.user_privileges == 1:
             # O usuário é um administrador, renderizar a página de admin
-            users = User.query.all()
-            products = Product.query.all()
+            users = Users.query.all()
+            products = Products.query.all()
             return render_template('/account/auth/admin.html', users=users, products=products)
     # Se não for um administrador ou não estiver logado, redirecionar para /login
     return redirect(url_for('login'))
@@ -208,7 +208,7 @@ def create_user():
     password = request.form['password']
     cellphone = request.form['cellphone']
     
-    user = User(user_privileges=user_privileges, name=name, username=username, email=email, password=password, cellphone=cellphone)
+    user = Users(user_privileges=user_privileges, name=name, username=username, email=email, password=password, cellphone=cellphone)
     db.session.add(user)
     db.session.commit()
     return redirect('/admin')
@@ -216,7 +216,7 @@ def create_user():
 # Rota para o administrador editar um usuário já existente no banco de dados
 @app.route('/edit_user/<int:user_id>', methods=['POST'])
 def edit_user(user_id):
-    user = User.query.get_or_404(user_id)
+    user = Users.query.get_or_404(user_id)
     
     user_privileges = request.form['user_privileges']
     name = request.form['name']
@@ -238,7 +238,7 @@ def edit_user(user_id):
 # Rota para o administrador excluir um usuário
 @app.route('/delete_user/<int:user_id>', methods=['POST'])
 def delete_user(user_id):
-    user = User.query.get_or_404(user_id)
+    user = Users.query.get_or_404(user_id)
     db.session.delete(user)
     db.session.commit()
     return redirect('/admin')
@@ -246,7 +246,7 @@ def delete_user(user_id):
 # Rota para o administrador visualizar todos os usuários cadastrados
 @app.route('/view_users')
 def view_users():
-    users = User.query.all()
+    users = Users.query.all()
     return render_template('/account/auth/view_users.html', users=users)
 
 
@@ -257,7 +257,7 @@ def view_users():
 # Rota para listar todos os produtos
 @app.route('/products')
 def products():
-    products = Product.query.all()
+    products = Products.query.all()
     return render_template('products/products.html', products=products)
 
 # Rota para criar um novo produto
@@ -272,7 +272,7 @@ def create_product():
     product_date = request.form['product_date']
     quantity = request.form['quantity']
     
-    product = Product(product_id=product_id, product_name=product_name, description=description, product_img=product_img, price=price, discount=discount, product_date=product_date, quantity=quantity)
+    product = Products(product_id=product_id, product_name=product_name, description=description, product_img=product_img, price=price, discount=discount, product_date=product_date, quantity=quantity)
     db.session.add(product)
     db.session.commit()
     return redirect('/admin')
@@ -280,7 +280,7 @@ def create_product():
 # Rota para editar um produto
 @app.route('/edit_product/<int:product_id>', methods=['POST'])
 def edit_product(product_id):
-    product = Product.query.get_or_404(product_id)
+    product = Products.query.get_or_404(product_id)
     
     product_id = request.form['product_id']
     product_name = request.form['product_name']
@@ -306,7 +306,7 @@ def edit_product(product_id):
 # Rota para excluir um produto
 @app.route('/delete_product/<int:product_id>', methods=['POST'])
 def delete_product(product_id):
-    product = Product.query.get_or_404(product_id)
+    product = Products.query.get_or_404(product_id)
     db.session.delete(product)
     db.session.commit()
     return redirect('/admin')
@@ -314,7 +314,7 @@ def delete_product(product_id):
 # Rota para visualizar todos os produtos
 @app.route('/view_products')
 def view_products():
-    products = Product.query.all()
+    products = Products.query.all()
     return render_template('products/view_products.html', products=products)
 
 ######################################################################
